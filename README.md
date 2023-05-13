@@ -1,10 +1,13 @@
-# Very short description of the package
+# Manage seeders like migrations
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/curicows/laravel-seeder-manager.svg?style=flat-square)](https://packagist.org/packages/curicows/laravel-seeder-manager)
 [![Total Downloads](https://img.shields.io/packagist/dt/curicows/laravel-seeder-manager.svg?style=flat-square)](https://packagist.org/packages/curicows/laravel-seeder-manager)
-![GitHub Actions](https://github.com/curicows/laravel-seeder-manager/actions/workflows/main.yml/badge.svg)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+[//]: # (![GitHub Actions]&#40;https://github.com/curicows/laravel-seeder-manager/actions/workflows/main.yml/badge.svg&#41;)
+
+This package allows you to manage your seeders like migrations. You can run and will not run again.
+
+I'm working on more features like rollback and more. Total WIP.
 
 ## Installation
 
@@ -15,10 +18,45 @@ composer require curicows/laravel-seeder-manager
 ```
 
 ## Usage
+Seed a database with a seeder interface:
 
 ```php
-// Usage description here
+class DataSeeder extends Seeder implements SeedDatabase
+{
+    public function getName(): string
+    {
+        return 'DataSeeder';
+    }
+
+    public function seed(): void
+    {
+        User::create([
+            'name' => 'Admin',
+            'email' => 'test@test.com',
+        ]);
+    }
+}
 ```
+
+Or a manager to handle multiple seeders:
+
+```php
+class DataManagerSeeder extends Seeder implements ManagerSeeder
+{
+    public function getName(): string
+    {
+        return 'DataManagerSeeder';
+    }
+
+    public function getSeeders(): array
+    {
+        return [
+            DataSeeder::class,
+        ];
+    }
+}
+```
+
 
 [//]: # (### Testing)
 
