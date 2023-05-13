@@ -1,0 +1,59 @@
+{
+    "name": "curicows/laravel-seeder-manager",
+    "description": "",
+    "keywords": [
+        "curicows",
+        "laravel-seeder-manager"
+    ],
+    "homepage": "https://github.com/curicows/laravel-seeder-manager",
+    "license": "MIT",
+    "type": "library",
+    "version": "dev-master",
+    "authors": [
+        {
+            "name": "Curicows",
+            "email": "curicows@curicows.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^v9.0.0",
+        "illuminate/database": "^v9.0.0"
+    },
+    "require-dev": {
+        "nunomaduro/collision": "^v6.0.0",
+        "orchestra/testbench": "^v7.0.0",
+        "phpunit/phpunit": "^9.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Curicows\\LaravelSeederManager\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Curicows\\LaravelSeederManager\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "post-autoload-dump": [
+            "@php vendor/bin/testbench package:discover --ansi"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Curicows\\LaravelSeederManager\\LaravelSeederManagerServiceProvider"
+            ],
+            "aliases": {
+                "LaravelSeederManager": "Curicows\\LaravelSeederManager\\LaravelSeederManagerFacade"
+            }
+        }
+    }
+}
